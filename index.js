@@ -56,7 +56,7 @@ let playState = false;
 // Listen for data events from the HID device
 footPedal.on('data', (data) => {
   // Assuming data is a Buffer and the report format is exactly 3 bytes like [0x00, code, 0x00]
-  const code = data[1];
+  const code = data[0];
 
   // Check for REW (0x04) having the highest priority
   if (code === 0x04) {
