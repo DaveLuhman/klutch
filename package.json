@@ -1,0 +1,11 @@
+{
+  "name": "klutch",
+  "version": "1.0.0",
+  "description": "USB-HID device to control Win11 Media",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dave Luhman",
+  "license": "ISC"
+}
