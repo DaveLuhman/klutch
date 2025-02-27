@@ -1,38 +1,25 @@
 // Require your modules
 const HID = require('node-hid');
-const mediaController = require('media-controller');
 
-// Create a media player instance
-const player = mediaController.createPlayer('FootPedalController');
 
-// Optional: Set initial button status if needed
-mediaController.setButtonStatus({
-  play: true,
-  pause: true,
-  next: false,
-  prev: false,
-  seek: true,
-  shuffle: false,
-  loop: 'None'
-});
 
 // Define custom functions for media actions
 function playPressed() {
   // Simulate play key down event
   // Under the hood, mediaController uses WinRT and SendInput to do this.
-  console.log('Play button pressed: simulating play key down');
-  // (Add your mediaController play key down call here)
+  console.log('Play button pressed, starting media playback.');
+  mediaController.setPlaybackStatus(mediaController.PlaybackStatusEnum.Playing)
 }
 
 function playReleased() {
   // Simulate pause key up event
-  console.log('Play button released: simulating pause key up');
-  // (Add your mediaController pause key up call here)
+  console.log('Play button released, pausing media playback.');
+  mediaController.setPlaybackStatus(mediaController.PlaybackStatusEnum.Paused)
 }
 
 function seekForward() {
   console.log('Seek forward 10 seconds');
-  // Implement a custom call, e.g., via mediaController or using a native addon, to simulate a 10-sec forward seek.
+  mediaController.seek (10)
 }
 
 function seekBackward() {
@@ -73,13 +60,12 @@ footPedal.on('data', (data) => {
     }
     // If already pressed, keep ignoring repeated signals
     return;
-  } else {
+  }
     // If the PLAY button is released (and if we're tracking that accurately by data or time)
     if (playState) {
       playState = false;
       playReleased();
     }
-  }
 
   // Lowest priority: FWD (0x01)
   if (code === 0x01) {

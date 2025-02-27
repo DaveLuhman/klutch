@@ -181,3 +181,7 @@ dist
 .vs
 dist
 *.db
+
+# Added by cargo
+
+/target
